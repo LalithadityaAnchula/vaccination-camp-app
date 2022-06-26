@@ -5,14 +5,14 @@ import Profile from "../pages/user/Profile";
 import Slots from "../pages/user/Slots";
 import Navbar from "../shared/Navbar";
 import Error from "../pages/Error";
-import ProtectedLayout from "../ProtectedLayout";
+import PrivateRoute from "../PrivateRoute";
 
 export default function User() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route element={<ProtectedLayout allowedRole="user" />}>
+        <Route element={<PrivateRoute allowedRole="user" />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cities/:cityId/:cityName/camps" element={<Camps />} />

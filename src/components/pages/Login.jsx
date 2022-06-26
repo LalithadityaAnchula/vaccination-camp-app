@@ -6,12 +6,10 @@ import { FiLock } from "react-icons/fi";
 import { FaExclamation } from "react-icons/fa";
 import UserContext from "../../context/users/UserContext";
 import AlertContext from "../../context/alert/AlertContext";
-import { loginUser, authenticate } from "../../context/users/UserAction";
+import { loginUser } from "../../context/users/UserAction";
 
 import { useState, useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
-import useAuth from "../../hooks/useAuth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,27 +17,26 @@ export default function Login() {
   const navigate = useNavigate();
   const { isLoading, dispatch } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext);
-  const { setAuth } = useAuth();
 
   // eslint-disable-next-line
   const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
     email
   );
-
-  useEffect(() => {
-    dispatch({ type: "SET_LOADING" });
-    const checkCookies = async () => {
-      const response = await authenticate();
-      dispatch({ type: "UNSET_LOADING" });
-      if (response.success) {
-        setAuth((prevValue) => ({ ...prevValue, role: response.role }));
-        console.log("set from login");
-        if (response.role === "admin") navigate("/admin");
-        else navigate("/");
-      }
-    };
-    checkCookies();
-  }, [dispatch, navigate, setAuth]);
+  console.log("login");
+  // useEffect(() => {
+  //   dispatch({ type: "SET_LOADING" });
+  //   const checkCookies = async () => {
+  //     const response = await authenticate();
+  //     dispatch({ type: "UNSET_LOADING" });
+  //     if (response.success) {
+  //       // setAuth((prevValue) => ({ ...prevValue, role: response.role }));
+  //       console.log("set from login");
+  //       if (response.role === "admin") navigate("/admin");
+  //       else navigate("/");
+  //     }
+  //   };
+  //   checkCookies();
+  // }, [dispatch, navigate, setAuth]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +44,7 @@ export default function Login() {
     const response = await loginUser(email, password);
     dispatch({ type: "GET_USER", payload: response.data });
     if (response.success) {
-      setAuth((prevValue) => ({ ...prevValue, role: response.role }));
+      // setAuth((prevValue) => ({ ...prevValue, role: response.role }));
       if (response.role === "admin") {
         navigate("/admin");
       } else if (response.role === "user") {

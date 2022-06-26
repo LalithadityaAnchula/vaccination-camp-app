@@ -22,7 +22,6 @@ import Loader from "../../shared/Loader";
 export default function Home() {
   const navigate = useNavigate();
   const { isLoading, dispatch } = useContext(UserContext);
-  const { setAuth } = useAuth();
   const [searchTarget, setSearchTarget] = useState("");
   const [citySearchResults, setCitySearchResults] = useState([]);
   const [campsSearchResults, setCampSearchResults] = useState([]);
@@ -38,12 +37,11 @@ export default function Home() {
           setCampSearchResults(response.data.camps.data);
           dispatch({ type: "GET_CITIES", payload: response.data.cities.data });
           dispatch({ type: "GET_CAMPS", payload: response.data.camps.data });
-          setAuth((prevValue) => ({ ...prevValue, role: response.role }));
         }
       };
       fetchResults();
     }
-  }, [dispatch, navigate, searchTarget, isSearchTargetValid, setAuth]);
+  }, [dispatch, navigate, searchTarget, isSearchTargetValid]);
 
   return (
     <>

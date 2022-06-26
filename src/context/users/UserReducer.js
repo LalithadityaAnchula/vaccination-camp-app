@@ -125,7 +125,7 @@ const appReducer = (state, action) => {
         ...state,
         isLoading: false,
         requests: state.requests.filter((request) => {
-          if (request._id !== action.payload._id) return request;
+          return request._id !== action.payload._id;
         }),
       };
     default:

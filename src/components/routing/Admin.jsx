@@ -8,14 +8,14 @@ import Profile from "../pages/user/Profile";
 import AdminSlots from "../pages/admin/AdminSlots";
 import Requests from "../pages/admin/Requests";
 import Error from "../pages/Error";
-import ProtectedLayout from "../ProtectedLayout";
+import PrivateRoute from "../PrivateRoute";
 
 export default function Admin() {
   return (
     <>
       <AdminNavbar />
       <Routes>
-        <Route element={<ProtectedLayout allowedRole="admin" />}>
+        <Route element={<PrivateRoute allowedRole="admin" />}>
           <Route path="/" element={<AdminHome />} />
           <Route path="/cities/:cityId" element={<AdminCity />} />
           <Route

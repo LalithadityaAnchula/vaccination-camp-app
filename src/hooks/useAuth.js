@@ -1,10 +1,15 @@
-import { useContext, useDebugValue } from "react";
-import AuthContext from "../context/AuthProvider";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuthStatus } from "../hooks/useAuthStatus";
+import Loader from "../components/shared/Loader";
 
-const useAuth = () => {
-  const { auth } = useContext(AuthContext);
-  useDebugValue(auth, (auth) => (auth?.user ? "Logged In" : "Logged Out"));
-  return useContext(AuthContext);
+const PrivateRoute = () => {
+  const { loggedIn, checkingStatus } = useAuthStatus();
+
+  if (checkingStatus) {
+    return <Loader />;
+  }
+
+  return loggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
-export default useAuth;
+export default PrivateRoute;
