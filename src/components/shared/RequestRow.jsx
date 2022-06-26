@@ -1,0 +1,49 @@
+import { useContext } from "react";
+import UserContext from "../../context/users/UserContext";
+import { acceptRequest } from "../../context/users/AdminAction";
+import { useParams } from "react-router-dom";
+import FloatUp from "./FloatUp";
+import ExpandOnHover from "./ExpandOnHover";
+
+export default function RequestRow({ request }) {
+  const { isLoading, dispatch } = useContext(UserContext);
+
+  const handleClick = async () => {
+    dispatch({ type: "SET_LOADING" });
+    const response = await acceptRequest(request.slot._id, request._id);
+    if (response.success) {
+      dispatch({ type: "UNSET_LOADING" });
+      dispatch({ type: "ACCEPT_REQUEST", payload: response.data });
+      dispatch({ type: "GET_USER", payload: response.data.user });
+    } else {
+      dispatch({ type: "UNSET_LOADING" });
+    }
+  };
+
+  return (
+    <tr key={request._id}>
+      <td>
+        <a href="/" title="Leicester City F.C.">
+          {request.user.firstName}
+        </a>
+      </td>
+      <td>
+        <a href="/" title="Leicester City F.C.">
+          {request.user.lastName}
+        </a>
+      </td>
+      <td>{request.user.phone}</td>
+      <td>{request.slot.doseType}</td>
+      <td>
+        <button
+          className={`button is-primary is-outlined is-small ${
+            isLoading && "is-loading"
+          }`}
+          onClick={handleClick}
+        >
+          Accept
+        </button>
+      </td>
+    </tr>
+  );
+}

@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.min-vh-90 {
+  min-height: 90vh;
+}
+
+.fix-height-16{
+  height:16px;
+}
+
+.fix-height-alert {
+  height: 1rem;
+}
+
+.fix-height-loader{
+  height:3rem;
+}
