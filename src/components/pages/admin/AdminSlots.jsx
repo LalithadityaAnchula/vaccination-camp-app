@@ -13,7 +13,7 @@ export default function AdminSlots() {
   const { isLoading, dispatch, slots } = useContext(UserContext);
   const { cityId, campId, campName } = useParams();
   const [slot, setSlot] = useState({
-    date: new Date(),
+    date: new Date().toLocaleDateString("en-ca"),
     doseType: 1,
     slotType: "morning",
   });
@@ -52,6 +52,7 @@ export default function AdminSlots() {
                   type="date"
                   placeholder="date"
                   value={slot.date}
+                  min={new Date().toLocaleDateString("en-ca")}
                   onChange={(e) =>
                     setSlot((prevValue) => ({
                       ...prevValue,

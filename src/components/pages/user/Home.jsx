@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 //contexts
 import UserContext from "../../../context/users/UserContext";
-import useAuth from "../../../hooks/useAuth";
 
 //Actions
 import { getAll } from "../../../context/users/UserAction";

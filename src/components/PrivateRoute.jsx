@@ -8,7 +8,6 @@ const PrivateRoute = ({ allowedRole }) => {
   if (checkingStatus) {
     return <Loader />;
   }
-  console.log("hello protected", auth);
 
   return auth?.role === allowedRole ? <Outlet /> : <Navigate to="/login" />;
 };

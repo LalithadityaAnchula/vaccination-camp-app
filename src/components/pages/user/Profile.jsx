@@ -1,7 +1,7 @@
 import { MdOutlineMail, MdDriveFileRenameOutline } from "react-icons/md";
 import { TbDeviceMobile } from "react-icons/tb";
 import { AiOutlineIdcard } from "react-icons/ai";
-import { FcOk, FcApproval } from "react-icons/fc";
+import { FcOk, FcApproval, FcApprove, FcBadDecision } from "react-icons/fc";
 import { FaExclamation } from "react-icons/fa";
 import UserContext from "../../../context/users/UserContext";
 import AlertContext from "../../../context/alert/AlertContext";
@@ -12,7 +12,9 @@ import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
 import FloatLeft from "../../shared/FloatLeft";
 import FloatRight from "../../shared/FloatRight";
+import FloatDown from "../../shared/FloatDown";
 import SlotCard from "../../shared/SlotCard";
+import DoseDetails from "../../shared/DoseDetails";
 
 export default function Profile() {
   const { isLoading, dispatch, user } = useContext(UserContext);
@@ -83,19 +85,42 @@ export default function Profile() {
         <div className="column section is-half">
           <FloatRight>
             <div className="is-flex is-justify-content-center block">
-              <button className="button is-large is-hovered">
-                <span>Vaccinated</span>
-                <span className="icon is-medium">
-                  <FcApproval />
-                </span>
-              </button>
+              <FloatDown>
+                {user?.firstDose && user?.secondDose ? (
+                  <button className="button is-large is-hovered">
+                    <span>Vaccinated</span>
+                    <span className="icon is-medium">
+                      <FcApproval />
+                    </span>
+                  </button>
+                ) : user?.firstDose ? (
+                  <button className="button is-large is-hovered">
+                    <span>Partially vaccinated</span>
+                    <span className="icon is-medium">
+                      <FcApprove />
+                    </span>
+                  </button>
+                ) : (
+                  <button className="button is-large is-hovered">
+                    <span>Not vaccinated</span>
+                    <span className="icon is-medium">
+                      <FcBadDecision />
+                    </span>
+                  </button>
+                )}
+              </FloatDown>
             </div>
-
             {user.activeSlot !== undefined && (
               <>
                 <h1 className="title is-4 block">Booked Slots</h1>
                 <SlotCard slot={user.activeSlot} />
               </>
+            )}
+            {user.firstDose !== undefined && (
+              <DoseDetails doseDetails={user?.firstDose} />
+            )}
+            {user.secondDose !== undefined && (
+              <DoseDetails doseDetails={user?.secondDose} />
             )}
           </FloatRight>
         </div>

@@ -128,6 +128,12 @@ const appReducer = (state, action) => {
           return request._id !== action.payload._id;
         }),
       };
+    case "SET_STATS":
+      return {
+        ...state,
+        isLoading: false,
+        stats: action.payload,
+      };
     default:
       return state;
   }

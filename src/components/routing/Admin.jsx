@@ -7,6 +7,7 @@ import AdminCity from "../pages/admin/AdminCity";
 import Profile from "../pages/user/Profile";
 import AdminSlots from "../pages/admin/AdminSlots";
 import Requests from "../pages/admin/Requests";
+import CityStats from "../pages/admin/CityStats";
 import Error from "../pages/Error";
 import PrivateRoute from "../PrivateRoute";
 
@@ -34,6 +35,7 @@ export default function Admin() {
             path="/cities/:cityId/:cityName/camps/:campId/:campName/slots/:slotId/requests"
             element={<Requests />}
           />
+          <Route path="/cities/:cityId/stats" element={<CityStats />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/*" element={<Error />} />
         </Route>

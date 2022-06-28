@@ -14,11 +14,12 @@ import { createCity } from "../../../context/users/AdminAction";
 //Components
 import AdminAvailableCities from "../../shared/AdminAvailableCities";
 import AdminAvailableCamps from "../../shared/AdminAvailableCamps";
+import FloatDown from "../../shared/FloatDown";
+import Loader from "../../shared/Loader";
 
 //React icons
 import { FiSearch } from "react-icons/fi";
 import { MdLocationCity } from "react-icons/md";
-import Loader from "../../shared/Loader";
 
 export default function AdminHome() {
   const navigate = useNavigate();
@@ -65,30 +66,32 @@ export default function AdminHome() {
       <main className="container">
         <div className="section columns">
           <div className="column is-half is-offset-one-quarter">
-            <div className="field">
-              <div
-                className={`control is-large has-icons-left ${
-                  isLoading && "is-loading"
-                }`}
-              >
-                <input
-                  type="text"
-                  className={`input is-medium is-rounded ${
-                    !isSearchTargetValid && searchTarget && "is-danger"
+            <FloatDown>
+              <div className="field">
+                <div
+                  className={`control is-large has-icons-left ${
+                    isLoading && "is-loading"
                   }`}
-                  value={searchTarget}
-                  onChange={(e) => setSearchTarget(e.target.value)}
-                />
-                <p className="fix-height-16 help is-danger has-text-centered">
-                  {!isSearchTargetValid &&
-                    searchTarget !== "" &&
-                    "Invalid search target"}
-                </p>
-                <span className="icon is-large is-left">
-                  <FiSearch color="blue" />
-                </span>
+                >
+                  <input
+                    type="text"
+                    className={`input is-medium is-rounded ${
+                      !isSearchTargetValid && searchTarget && "is-danger"
+                    }`}
+                    value={searchTarget}
+                    onChange={(e) => setSearchTarget(e.target.value)}
+                  />
+                  <p className="fix-height-16 help is-danger has-text-centered">
+                    {!isSearchTargetValid &&
+                      searchTarget !== "" &&
+                      "Invalid search target"}
+                  </p>
+                  <span className="icon is-large is-left">
+                    <FiSearch color="blue" />
+                  </span>
+                </div>
               </div>
-            </div>
+            </FloatDown>
           </div>
         </div>
         {citySearchResults.length === 0 &&

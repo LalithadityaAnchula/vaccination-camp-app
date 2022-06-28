@@ -2,7 +2,7 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const axiosInstance = axios.create({
-  baseURL: BASE_URL + "/",
+  baseURL: BASE_URL,
   withCredentials: true,
 });
 
@@ -99,6 +99,17 @@ export const getRequests = async (slotId) => {
 export const acceptRequest = async (slotId, requestId) => {
   try {
     const res = await axiosInstance.delete(`/${slotId}/requests/${requestId}`);
+    return res.data;
+  } catch (err) {
+    return { success: false, data: {} };
+  }
+};
+
+//Getting stats
+
+export const getStatsInCity = async (cityId) => {
+  try {
+    const res = await axiosInstance.get(`/cities/${cityId}/stats`);
     return res.data;
   } catch (err) {
     return { success: false, data: {} };

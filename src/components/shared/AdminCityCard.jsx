@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import FloatUp from "./FloatUp";
 import ExpandOnHover from "./ExpandOnHover";
 import { FcAbout, FcEditImage } from "react-icons/fc";
-import { MdDeleteForever } from "react-icons/md";
+import { ImStatsDots } from "react-icons/im";
 export default function AdminCityCard({ city }) {
   return (
     <ExpandOnHover>
@@ -30,10 +30,10 @@ export default function AdminCityCard({ city }) {
               <FcEditImage />
             </Link>
             <Link
-              to={`cities/${city._id}/camps`}
+              to={`cities/${city.name}/stats`}
               className="card-footer-item button is-info is-light"
             >
-              <MdDeleteForever />
+              <ImStatsDots />
             </Link>
           </div>
         </div>

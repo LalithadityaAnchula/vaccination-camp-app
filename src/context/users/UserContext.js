@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
     camps: [],
     slots: [],
     requests: [],
+    stats: {},
   };
 
   const [state, dispatch] = useReducer(Reducer, initialState);

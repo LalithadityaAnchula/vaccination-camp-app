@@ -8,7 +8,7 @@ import UserContext from "../../context/users/UserContext";
 import AlertContext from "../../context/alert/AlertContext";
 import { loginUser } from "../../context/users/UserAction";
 
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
@@ -22,21 +22,6 @@ export default function Login() {
   const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
     email
   );
-  console.log("login");
-  // useEffect(() => {
-  //   dispatch({ type: "SET_LOADING" });
-  //   const checkCookies = async () => {
-  //     const response = await authenticate();
-  //     dispatch({ type: "UNSET_LOADING" });
-  //     if (response.success) {
-  //       // setAuth((prevValue) => ({ ...prevValue, role: response.role }));
-  //       console.log("set from login");
-  //       if (response.role === "admin") navigate("/admin");
-  //       else navigate("/");
-  //     }
-  //   };
-  //   checkCookies();
-  // }, [dispatch, navigate, setAuth]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
