@@ -1,9 +1,11 @@
 import AdminAvailableSlots from "../../shared/AdminAvailableSlots";
 import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
 import { getSlots } from "../../../context/users/UserAction";
 import { createSlot } from "../../../context/users/AdminAction";
 import { useContext, useEffect, useState } from "react";
 import Loader from "../../shared/Loader";
+import Alert from "../../shared/Alert";
 import { useNavigate, useParams } from "react-router-dom";
 import { CgTimer, CgCalendarDates } from "react-icons/cg";
 import { TbNumbers } from "react-icons/tb";
@@ -11,6 +13,7 @@ import { TbNumbers } from "react-icons/tb";
 export default function AdminSlots() {
   const navigate = useNavigate();
   const { isLoading, dispatch, slots } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const { cityId, campId, campName } = useParams();
   const [slot, setSlot] = useState({
     date: new Date().toLocaleDateString("en-ca"),
@@ -34,7 +37,10 @@ export default function AdminSlots() {
     const response = await createSlot(cityId, campId, slot);
     if (response.success) {
       dispatch({ type: "ADD_SLOT", payload: response.data });
-    } else dispatch({ type: "UNSET_LOADING" });
+    } else {
+      dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
+    }
   };
   return (
     <>
@@ -60,6 +66,9 @@ export default function AdminSlots() {
                     }))
                   }
                 />
+                <div className="help is-danger has-text-centered">
+                  <Alert />
+                </div>
                 <span className="icon is-small is-left">
                   <CgCalendarDates />
                 </span>

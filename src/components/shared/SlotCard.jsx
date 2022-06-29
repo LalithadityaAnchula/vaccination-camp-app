@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import UserContext from "../../context/users/UserContext";
+import AlertContext from "../../context/alert/AlertContext";
 import { bookSlot, getUser } from "../../context/users/UserAction";
 import { useParams } from "react-router-dom";
 import FloatUp from "./FloatUp";
 import ExpandOnHover from "./ExpandOnHover";
+
 export default function SlotCard({ slot }) {
   const { isLoading, dispatch, user } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const { campId, cityId } = useParams();
 
   const handleClick = async () => {
@@ -17,6 +20,7 @@ export default function SlotCard({ slot }) {
       dispatch({ type: "GET_USER", payload: userResponse.data });
     } else {
       dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
     }
   };
 
@@ -43,6 +47,7 @@ export default function SlotCard({ slot }) {
                 </div>
               </div>
             </div>
+
             <div className="card-footer">
               {user?.activeSlot ? (
                 <button

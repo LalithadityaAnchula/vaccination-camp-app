@@ -6,19 +6,20 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-// Add a response interceptor
-axiosInstance.interceptors.response.use(
-  function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response;
-  },
-  function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return error.response;
-  }
-);
+// // Add a response interceptor
+// axiosInstance.interceptors.response.use(
+//   function (response) {
+//     // Any status code that lie within the range of 2xx cause this function to trigger
+//     // Do something with response data
+//     return response;
+//   },
+//   function (error) {
+//     // Any status codes that falls outside the range of 2xx cause this function to trigger
+//     // Do something with response error
+//     console.log(error.response.data);
+//     return error.response;
+//   }
+// );
 
 // Login ,register,logout and authentication
 export const logoutUser = async () => {
@@ -26,7 +27,6 @@ export const logoutUser = async () => {
     const res = await axiosInstance.get("/auth/logout");
     return res.data;
   } catch (err) {
-    console.log(err);
     return { success: false, data: {} };
   }
 };
@@ -39,8 +39,8 @@ export const loginUser = async (email, password) => {
     });
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -63,8 +63,8 @@ export const registerUser = async (
     });
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -73,8 +73,8 @@ export const authenticate = async () => {
     const res = await axiosInstance.get("/auth/authenticate");
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -83,8 +83,8 @@ export const getUser = async () => {
     const res = await axiosInstance.get("/auth/me");
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -99,8 +99,8 @@ export const updateUser = async (firstName, lastName, email, phone, aadhar) => {
     });
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -119,8 +119,8 @@ export const getAll = async (searchTarget) => {
       role: campsResponse.data.role,
     };
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -132,8 +132,8 @@ export const getCities = async (searchTarget) => {
     );
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -143,8 +143,8 @@ export const getCity = async (id) => {
     const res = await axiosInstance.get(`/cities/${id}`);
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -156,8 +156,8 @@ export const getCamps = async (searchTarget, cityId) => {
     );
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -167,8 +167,8 @@ export const getCamp = async (cityId, campId) => {
     const res = await axiosInstance.get(`/cities/${cityId}/camps/${campId}`);
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -180,8 +180,8 @@ export const getSlots = async (cityId, campId) => {
     );
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -194,7 +194,7 @@ export const bookSlot = async (cityId, campId, slotId, userId) => {
     );
     return res.data;
   } catch (err) {
-    console.log(err);
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };

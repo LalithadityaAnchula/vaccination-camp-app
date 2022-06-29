@@ -36,7 +36,7 @@ export default function Login() {
         navigate("/");
       }
     } else {
-      setAlert("Invalied Credentials", "danger");
+      setAlert(response.msg, "danger");
     }
     setEmail("");
     setPassword("");

@@ -8,8 +8,8 @@ import { TbDeviceMobile } from "react-icons/tb";
 import { AiOutlineIdcard } from "react-icons/ai";
 import UserContext from "../../context/users/UserContext";
 import AlertContext from "../../context/alert/AlertContext";
-import { authenticate, registerUser } from "../../context/users/UserAction";
-import { useState, useEffect, useContext } from "react";
+import { registerUser } from "../../context/users/UserAction";
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import FloatUp from "../shared/FloatUp";
 
@@ -35,24 +35,6 @@ export default function Register() {
   const isValidConfirmPassword =
     password === confirmPassword && confirmPassword.length >= 6;
 
-  useEffect(() => {
-    dispatch({ type: "SET_LOADING" });
-    const checkCookies = async () => {
-      const response = await authenticate();
-      if (response.success) {
-        dispatch({ type: "UNSET_LOADING" });
-        if (response.data.role === "admin") {
-          navigate("/admin");
-        } else if (response.data.role === "user") {
-          navigate("/");
-        }
-      } else {
-        dispatch({ type: "UNSET_LOADING" });
-      }
-    };
-    checkCookies();
-  }, [dispatch, navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) alert("password != confirmPassword");
@@ -71,7 +53,7 @@ export default function Register() {
       navigate("/");
     } else {
       dispatch({ type: "UNSET_LOADING" });
-      setAlert("Registration Failed", "danger");
+      setAlert(response.msg, "danger");
     }
   };
 

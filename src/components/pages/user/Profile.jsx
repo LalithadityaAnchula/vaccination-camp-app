@@ -46,17 +46,18 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch({ type: "SET_LOADING" });
-    const checkCookies = async () => {
+    const fetchUser = async () => {
       const response = await getUser();
       setCurrentUser(response.data);
       if (response.success) {
         prevUserDetails.current = response.data;
         dispatch({ type: "GET_USER", payload: response.data });
       } else {
+        dispatch({ type: "UNSET_LOADING" });
         navigate("/login");
       }
     };
-    checkCookies();
+    fetchUser();
   }, [dispatch, navigate]);
 
   const handleSubmit = async (e) => {
@@ -74,7 +75,8 @@ export default function Profile() {
       prevUserDetails.current = response.data;
       dispatch({ type: "GET_USER", payload: response.data });
     } else {
-      setAlert("Proile Update failed", "danger");
+      dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
     }
   };
 

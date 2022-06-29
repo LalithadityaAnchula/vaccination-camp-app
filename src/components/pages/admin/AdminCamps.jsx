@@ -1,5 +1,6 @@
 import AdminAvailableCamps from "../../shared/AdminAvailableCamps";
 import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
 import { getCamps } from "../../../context/users/UserAction";
 import { createCamp } from "../../../context/users/AdminAction";
 import { useState, useContext, useEffect } from "react";
@@ -8,10 +9,12 @@ import { GiCampingTent } from "react-icons/gi";
 import { RiSyringeFill } from "react-icons/ri";
 import { MdLocationOn } from "react-icons/md";
 import Loader from "../../shared/Loader";
+import Alert from "../../shared/Alert";
 
 export default function AdminCamps() {
   const navigate = useNavigate();
   const { isLoading, dispatch } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const { cityId, cityName } = useParams();
 
   const [camp, setCamp] = useState({
@@ -40,7 +43,10 @@ export default function AdminCamps() {
     const response = await createCamp(cityId, camp);
     if (response.success) {
       dispatch({ type: "ADD_CAMP", payload: response.data });
-    } else dispatch({ type: "UNSET_LOADING" });
+    } else {
+      dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
+    }
   };
 
   return (
@@ -67,6 +73,9 @@ export default function AdminCamps() {
                       }))
                     }
                   />
+                  <div className="help is-danger has-text-centered">
+                    <Alert />
+                  </div>
                   <span className="icon is-small is-left">
                     <GiCampingTent />
                   </span>
@@ -154,7 +163,7 @@ export default function AdminCamps() {
               </div>
             </div>
             <div className="column is-narrow">
-              <div className="field" style={{ marginTop: "32px" }}>
+              <div className="field">
                 <button className="button is-info">Add</button>
               </div>
             </div>

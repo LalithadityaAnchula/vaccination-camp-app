@@ -1,11 +1,9 @@
 //React Hooks
 import { useState, useContext, useEffect } from "react";
 
-//Router dom imports
-import { useNavigate } from "react-router-dom";
-
 //contexts
 import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
 
 //Actions
 import { getAll } from "../../../context/users/UserAction";
@@ -17,10 +15,11 @@ import AvailableCamps from "../../shared/AvailableCamps";
 //React icons
 import { FiSearch } from "react-icons/fi";
 import Loader from "../../shared/Loader";
+import Alert from "../../shared/Alert";
 
 export default function Home() {
-  const navigate = useNavigate();
   const { isLoading, dispatch } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const [searchTarget, setSearchTarget] = useState("");
   const [citySearchResults, setCitySearchResults] = useState([]);
   const [campsSearchResults, setCampSearchResults] = useState([]);
@@ -36,11 +35,14 @@ export default function Home() {
           setCampSearchResults(response.data.camps.data);
           dispatch({ type: "GET_CITIES", payload: response.data.cities.data });
           dispatch({ type: "GET_CAMPS", payload: response.data.camps.data });
+        } else {
+          dispatch({ type: "UNSET_LOADING" });
+          setAlert(response.msg, "danger");
         }
       };
       fetchResults();
     }
-  }, [dispatch, navigate, searchTarget, isSearchTargetValid]);
+  }, [dispatch, searchTarget, isSearchTargetValid, setAlert]);
 
   return (
     <>
@@ -65,6 +67,7 @@ export default function Home() {
                   {!isSearchTargetValid &&
                     searchTarget !== "" &&
                     "Invalid search target"}
+                  <Alert />
                 </p>
                 <span className="icon is-large is-left">
                   <FiSearch color="blue" />

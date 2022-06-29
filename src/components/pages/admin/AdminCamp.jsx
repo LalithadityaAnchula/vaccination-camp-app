@@ -1,5 +1,7 @@
 import Loader from "../../shared/Loader";
+import Alert from "../../shared/Alert";
 import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
 import { getCamp } from "../../../context/users/UserAction";
 import { updateCamp } from "../../../context/users/AdminAction";
 import { useState, useContext, useEffect } from "react";
@@ -11,6 +13,7 @@ import { RiSyringeFill } from "react-icons/ri";
 export default function AdminCamp() {
   const navigate = useNavigate();
   const { isLoading, dispatch, user } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const [camp, setCamp] = useState({
     vaccinationStock: {
       firstDose: 0,
@@ -39,10 +42,12 @@ export default function AdminCamp() {
     if (response.success && response.role === "admin") {
       setCamp(response.data);
       dispatch({ type: "UPDATE_CAMP", payload: response.data });
+    } else {
+      dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
     }
   };
 
-  if (isLoading) return <Loader />;
   return (
     <form onSubmit={handleSubmit} className="section">
       <h1 className="title pb-4 has-text-grey">Update camp</h1>
@@ -63,6 +68,9 @@ export default function AdminCamp() {
                   }))
                 }
               />
+              <p className="help is-danger has-text-centered">
+                <Alert />
+              </p>
               <span className="icon is-small is-left">
                 <MdLocationCity />
               </span>
@@ -161,7 +169,13 @@ export default function AdminCamp() {
       </div>
       <div className="level">
         <div className="level-item">
-          <button className=" button is-info is-medium">Update Changes</button>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <button className={"button is-info is-medium"}>
+              Update Changes
+            </button>
+          )}
         </div>
       </div>
     </form>

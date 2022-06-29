@@ -1,11 +1,9 @@
 //React Hooks
 import { useState, useContext, useEffect } from "react";
 
-//Router dom imports
-import { useNavigate } from "react-router-dom";
-
 //contexts
 import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
 
 //Actions
 import { getAll } from "../../../context/users/UserAction";
@@ -16,14 +14,15 @@ import AdminAvailableCities from "../../shared/AdminAvailableCities";
 import AdminAvailableCamps from "../../shared/AdminAvailableCamps";
 import FloatDown from "../../shared/FloatDown";
 import Loader from "../../shared/Loader";
+import Alert from "../../shared/Alert";
 
 //React icons
 import { FiSearch } from "react-icons/fi";
 import { MdLocationCity } from "react-icons/md";
 
 export default function AdminHome() {
-  const navigate = useNavigate();
   const { isLoading, dispatch } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const [searchTarget, setSearchTarget] = useState("");
   const [citySearchResults, setCitySearchResults] = useState([]);
   const [campsSearchResults, setCampSearchResults] = useState([]);
@@ -40,11 +39,13 @@ export default function AdminHome() {
           setCampSearchResults(response.data.camps.data);
           dispatch({ type: "GET_CITIES", payload: response.data.cities.data });
           dispatch({ type: "GET_CAMPS", payload: response.data.camps.data });
+        } else {
+          setAlert(response.msg, "danger");
         }
       };
       fetchResults();
     }
-  }, [dispatch, navigate, searchTarget, isSearchTargetValid]);
+  }, [dispatch, searchTarget, isSearchTargetValid, setAlert]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -57,6 +58,7 @@ export default function AdminHome() {
       dispatch({ type: "ADD_CITY", payload: response.data });
     } else {
       dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
     }
     setSearchTarget("");
   };
@@ -81,11 +83,12 @@ export default function AdminHome() {
                     value={searchTarget}
                     onChange={(e) => setSearchTarget(e.target.value)}
                   />
-                  <p className="fix-height-16 help is-danger has-text-centered">
+                  <div className="fix-height-16 help is-danger has-text-centered">
                     {!isSearchTargetValid &&
                       searchTarget !== "" &&
                       "Invalid search target"}
-                  </p>
+                    <Alert />
+                  </div>
                   <span className="icon is-large is-left">
                     <FiSearch color="blue" />
                   </span>
