@@ -76,7 +76,7 @@ export default function CityStats() {
           ></progress>
         </div>
         <div className="section">
-          <h2 className="subtitle is-6 has-text-grey">Completely Vaccinated</h2>
+          <h2 className="subtitle is-6 has-text-grey">Not Vaccinated</h2>
           <progress
             style={{ transition: "all 0.5s ease-in-out" }}
             className="progress is-danger"

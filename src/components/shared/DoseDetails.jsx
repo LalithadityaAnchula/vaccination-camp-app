@@ -5,7 +5,7 @@ export default function DoseDetails({ doseDetails }) {
     let dosetype = doseDetails?.doseType;
     if (doseDetails?.doseType === 1) {
       dosetype = "firstDose";
-    } else if (doseDetails?.doseType === 1) {
+    } else if (doseDetails?.doseType === 2) {
       dosetype = "secondDose";
     }
     window.open(

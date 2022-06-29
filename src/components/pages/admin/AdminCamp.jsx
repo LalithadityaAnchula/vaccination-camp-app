@@ -17,6 +17,7 @@ export default function AdminCamp() {
       secondDose: 0,
     },
     name: "camp",
+    population: 0,
   });
   const { campId, cityId } = useParams();
   useEffect(() => {
@@ -97,7 +98,12 @@ export default function AdminCamp() {
                     type="number"
                     placeholder="Extra small"
                     value={camp.population}
-                    readOnly
+                    onChange={(e) =>
+                      setCamp((prevValue) => ({
+                        ...prevValue,
+                        population: e.target.value,
+                      }))
+                    }
                   />
                   <span className="icon is-small is-left">
                     <MdOutlineEmojiPeople />
