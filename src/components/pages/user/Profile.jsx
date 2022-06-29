@@ -81,8 +81,8 @@ export default function Profile() {
   return (
     <>
       <div className="fix-height-loader">{isLoading && <Loader />}</div>
-      <div className="columns">
-        <div className="column section is-half">
+      <div className="columns is-desktop">
+        <div className="column section">
           <FloatRight>
             <div className="is-flex is-justify-content-center block">
               <FloatDown>
@@ -116,15 +116,21 @@ export default function Profile() {
                 <SlotCard slot={user.activeSlot} />
               </>
             )}
-            {user.firstDose !== undefined && (
-              <DoseDetails doseDetails={user?.firstDose} />
-            )}
-            {user.secondDose !== undefined && (
-              <DoseDetails doseDetails={user?.secondDose} />
-            )}
+            <div className="columns is-desktop">
+              <div className="column">
+                {user.firstDose !== undefined && (
+                  <DoseDetails doseDetails={user?.firstDose} />
+                )}
+              </div>
+              <div className="column">
+                {user.secondDose !== undefined && (
+                  <DoseDetails doseDetails={user?.secondDose} />
+                )}
+              </div>
+            </div>
           </FloatRight>
         </div>
-        <form onSubmit={handleSubmit} className="section column is-half">
+        <form onSubmit={handleSubmit} className="section column">
           <FloatLeft>
             <Alert />
             <div className="columns is-multiline">
