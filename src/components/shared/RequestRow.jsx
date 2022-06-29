@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import UserContext from "../../context/users/UserContext";
+import AlertContext from "../../context/alert/AlertContext";
 import { acceptRequest } from "../../context/users/AdminAction";
-import { useParams } from "react-router-dom";
-import FloatUp from "./FloatUp";
-import ExpandOnHover from "./ExpandOnHover";
 
 export default function RequestRow({ request }) {
   const { isLoading, dispatch } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
 
   const handleClick = async () => {
     dispatch({ type: "SET_LOADING" });
@@ -17,6 +16,7 @@ export default function RequestRow({ request }) {
       dispatch({ type: "GET_USER", payload: response.data.user });
     } else {
       dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
     }
   };
 

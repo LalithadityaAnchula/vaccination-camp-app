@@ -68,9 +68,9 @@ export default function AdminCamp() {
                   }))
                 }
               />
-              <p className="help is-danger has-text-centered">
+              <div className="help is-danger has-text-centered">
                 <Alert />
-              </p>
+              </div>
               <span className="icon is-small is-left">
                 <MdLocationCity />
               </span>

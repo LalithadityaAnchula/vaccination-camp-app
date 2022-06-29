@@ -101,7 +101,8 @@ export const acceptRequest = async (slotId, requestId) => {
     const res = await axiosInstance.delete(`/${slotId}/requests/${requestId}`);
     return res.data;
   } catch (err) {
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };
 
@@ -112,6 +113,7 @@ export const getStatsInCity = async (cityId) => {
     const res = await axiosInstance.get(`/cities/${cityId}/stats`);
     return res.data;
   } catch (err) {
-    return { success: false, data: {} };
+    console.log(err.response);
+    return err.response.data;
   }
 };

@@ -1,5 +1,7 @@
 import Loader from "../../shared/Loader";
+import Alert from "../../shared/Alert";
 import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
 import { getCity } from "../../../context/users/UserAction";
 import { updateCity } from "../../../context/users/AdminAction";
 import { useState, useContext, useEffect } from "react";
@@ -11,6 +13,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 export default function AdminCity() {
   const navigate = useNavigate();
   const { isLoading, dispatch, user } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const [city, setCity] = useState({
     name: "",
     population: 10,
@@ -39,8 +42,8 @@ export default function AdminCity() {
       setCity(response.data);
       dispatch({ type: "UNSET_LOADING" });
     } else {
-      console.log(response.data);
-      dispatch({ type: "GET_CITY" });
+      dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
     }
   };
 
@@ -66,6 +69,9 @@ export default function AdminCity() {
                   }
                   required
                 />
+                <div className="help is-danger has-text-centered">
+                  <Alert />
+                </div>
                 <span className="icon is-small is-left">
                   <FaCity />
                 </span>

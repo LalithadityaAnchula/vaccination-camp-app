@@ -1,14 +1,13 @@
 import UserContext from "../../../context/users/UserContext";
 import { getRequests } from "../../../context/users/AdminAction";
 import { useContext, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Loader from "../../shared/Loader";
+import { useParams } from "react-router-dom";
+import Alert from "../../shared/Alert";
 import RequestRow from "../../shared/RequestRow";
 
 export default function Requests() {
   const { slotId } = useParams();
-  const navigate = useNavigate();
-  const { isLoading, dispatch, requests } = useContext(UserContext);
+  const { dispatch, requests } = useContext(UserContext);
   useEffect(() => {
     dispatch({ type: "SET_LOADING" });
     const fetchRequests = async () => {
@@ -16,17 +15,16 @@ export default function Requests() {
       if (response.success) {
         dispatch({ type: "GET_REQUESTS", payload: response.data });
       } else {
-        dispatch({ type: "GET_REQUESTS", payload: [] });
-        navigate("/login");
+        dispatch({ type: "UNSET_LOADING" });
       }
     };
     fetchRequests();
-  }, [dispatch, slotId, navigate]);
+  }, [dispatch, slotId]);
+
   return (
     <>
-      <div className="fix-height-loader">{isLoading && <Loader />}</div>
-
-      <div className="section is-flex is-justify-content-center is-flex-wrap-wrap is-align-content-center">
+      <Alert />
+      <div className="container is-flex is-justify-content-center is-flex-wrap-wrap is-align-content-center">
         <div className="table-container">
           <table className="table">
             <thead>
