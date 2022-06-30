@@ -27,7 +27,7 @@ export default function AdminHome() {
   const [citySearchResults, setCitySearchResults] = useState([]);
   const [campsSearchResults, setCampSearchResults] = useState([]);
   const [isMetroPolitan, setIsMetroPolitan] = useState(false);
-  const isSearchTargetValid = new RegExp("[a-zA-Z]", "i").test(searchTarget);
+  const isSearchTargetValid = /^[a-zA-Z]+$/.test(searchTarget);
 
   useEffect(() => {
     if (isSearchTargetValid || searchTarget === "") {

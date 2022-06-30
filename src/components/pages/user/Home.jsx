@@ -23,7 +23,7 @@ export default function Home() {
   const [searchTarget, setSearchTarget] = useState("");
   const [citySearchResults, setCitySearchResults] = useState([]);
   const [campsSearchResults, setCampSearchResults] = useState([]);
-  const isSearchTargetValid = new RegExp("[a-zA-Z]", "i").test(searchTarget);
+  const isSearchTargetValid = /^[a-zA-Z]+$/.test(searchTarget);
 
   useEffect(() => {
     if (isSearchTargetValid || searchTarget === "") {
