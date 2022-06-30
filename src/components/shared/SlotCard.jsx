@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import FloatUp from "./FloatUp";
 import ExpandOnHover from "./ExpandOnHover";
 
-export default function SlotCard({ slot }) {
+export default function SlotCard({ slot, inProfile }) {
   const { isLoading, dispatch, user } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext);
   const { campId, cityId } = useParams();
@@ -43,32 +43,33 @@ export default function SlotCard({ slot }) {
                 <div className="tags are-large">
                   <span className="tag">{slot.doseType}</span>
                   <span className="tag">{slot.slotType}</span>
-                  <span className="tag">{slot.available}</span>
+                  {!inProfile && <span className="tag">{slot.available}</span>}
                 </div>
               </div>
             </div>
-
-            <div className="card-footer">
-              {user?.activeSlot ? (
-                <button
-                  className={`card-footer-item button is-info is-light ${
-                    isLoading && "is-loading"
-                  }`}
-                  disabled
-                >
-                  Book
-                </button>
-              ) : (
-                <button
-                  className={`card-footer-item button is-info is-light ${
-                    isLoading && "is-loading"
-                  }`}
-                  onClick={handleClick}
-                >
-                  Book
-                </button>
-              )}
-            </div>
+            {!inProfile && (
+              <div className="card-footer">
+                {user?.activeSlot ? (
+                  <button
+                    className={`card-footer-item button is-info is-light ${
+                      isLoading && "is-loading"
+                    }`}
+                    disabled
+                  >
+                    Book
+                  </button>
+                ) : (
+                  <button
+                    className={`card-footer-item button is-info is-light ${
+                      isLoading && "is-loading"
+                    }`}
+                    onClick={handleClick}
+                  >
+                    Book
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </FloatUp>
       </ExpandOnHover>

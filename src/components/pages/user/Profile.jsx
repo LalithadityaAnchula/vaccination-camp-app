@@ -113,10 +113,10 @@ export default function Profile() {
               </FloatDown>
             </div>
             {user.activeSlot !== undefined && (
-              <>
+              <div className="my-4">
                 <h1 className="title is-4 block">Booked Slots</h1>
-                <SlotCard slot={user.activeSlot} />
-              </>
+                <SlotCard slot={user.activeSlot} inProfile={true} />
+              </div>
             )}
             <div className="columns is-desktop">
               <div className="column">

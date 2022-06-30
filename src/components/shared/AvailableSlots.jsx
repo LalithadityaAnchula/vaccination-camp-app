@@ -11,7 +11,7 @@ export default function AvailableSlots() {
           .map((slot) => {
             return (
               <div key={slot._id} className="column is-one-quarter">
-                <SlotCard slot={slot} />
+                <SlotCard slot={slot} inProfile={false} />
               </div>
             );
           })}

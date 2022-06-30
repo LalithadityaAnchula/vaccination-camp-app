@@ -17,7 +17,7 @@ export const AlertProvider = ({ children }) => {
       },
     });
 
-    setTimeout(() => dispatch({ type: "REMOVE_ALERT" }), 1500);
+    setTimeout(() => dispatch({ type: "REMOVE_ALERT" }), 1200);
   };
 
   return (

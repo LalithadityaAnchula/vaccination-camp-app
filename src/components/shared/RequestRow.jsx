@@ -29,11 +29,11 @@ export default function RequestRow({ request }) {
       </td>
       <td>
         <a href="/" title="Leicester City F.C.">
-          {request.user.lastName}
+          {request?.user?.lastName}
         </a>
       </td>
-      <td>{request.user.phone}</td>
-      <td>{request.slot.doseType}</td>
+      <td>{request?.user?.phone}</td>
+      <td>{request?.slot?.doseType}</td>
       <td>
         <button
           className={`button is-primary is-outlined is-small ${

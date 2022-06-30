@@ -1,22 +1,24 @@
 import { useContext } from "react";
 import UserContext from "../../context/users/UserContext";
 import { bookSlot } from "../../context/users/UserAction";
+import AlertContext from "../../context/alert/AlertContext";
 import { useParams, Link } from "react-router-dom";
 import FloatUp from "./FloatUp";
 import ExpandOnHover from "./ExpandOnHover";
 
 export default function AdminSlotCard({ slot }) {
   const { isLoading, dispatch, user } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const { campId, cityId } = useParams();
 
   const handleClick = async () => {
     dispatch({ type: "SET_LOADING" });
     const response = await bookSlot(cityId, campId, slot._id, user._id);
     if (response.success) {
-      alert("slot booked");
       dispatch({ type: "UNSET_LOADING" });
     } else {
       dispatch({ type: "UNSET_LOADING" });
+      setAlert(response.msg, "danger");
     }
   };
 

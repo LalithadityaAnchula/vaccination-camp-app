@@ -70,7 +70,6 @@ export const updateCamp = async (cityId, campId, camp) => {
 //Crating a slot
 export const createSlot = async (cityId, campId, slot) => {
   try {
-    console.log(campId);
     const res = await axiosInstance.post(
       `/cities/${cityId}/camps/${campId}/slots`,
       slot
