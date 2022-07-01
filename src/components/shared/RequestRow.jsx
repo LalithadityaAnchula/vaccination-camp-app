@@ -36,7 +36,8 @@ export default function RequestRow({ request }) {
       <td>{request?.user?.phone}</td>
       <td>{request?.slot?.doseType}</td>
       <td>
-        {request?.slot?.date.getTime() - THREE_HUNDRED_THIRTY_MINUTES_IN_MS <=
+        {new Date(request?.slot?.date).getTime() -
+          THREE_HUNDRED_THIRTY_MINUTES_IN_MS <=
         new Date().getTime() ? (
           <button className="button is-primary is-outlined is-small" disabled>
             Accept
