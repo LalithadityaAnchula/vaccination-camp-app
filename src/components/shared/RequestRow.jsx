@@ -4,6 +4,7 @@ import AlertContext from "../../context/alert/AlertContext";
 import { acceptRequest } from "../../context/users/AdminAction";
 
 export default function RequestRow({ request }) {
+  const THREE_HUNDRED_THIRTY_MINUTES_IN_MS = 19800000;
   const { isLoading, dispatch } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext);
 
@@ -35,14 +36,21 @@ export default function RequestRow({ request }) {
       <td>{request?.user?.phone}</td>
       <td>{request?.slot?.doseType}</td>
       <td>
-        <button
-          className={`button is-primary is-outlined is-small ${
-            isLoading && "is-loading"
-          }`}
-          onClick={handleClick}
-        >
-          Accept
-        </button>
+        {request?.slot?.date.getTime() - THREE_HUNDRED_THIRTY_MINUTES_IN_MS <=
+        new Date().getTime() ? (
+          <button className="button is-primary is-outlined is-small" disabled>
+            Accept
+          </button>
+        ) : (
+          <button
+            className={`button is-primary is-outlined is-small ${
+              isLoading && "is-loading"
+            }`}
+            onClick={handleClick}
+          >
+            Accept
+          </button>
+        )}
       </td>
     </tr>
   );
