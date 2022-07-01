@@ -29,7 +29,6 @@ export default function Login() {
     const response = await loginUser(email, password);
     dispatch({ type: "GET_USER", payload: response.data });
     if (response.success) {
-      // setAuth((prevValue) => ({ ...prevValue, role: response.role }));
       if (response.role === "admin") {
         navigate("/admin");
       } else if (response.role === "user") {
