@@ -63,12 +63,12 @@ export default function Home() {
                   value={searchTarget}
                   onChange={(e) => setSearchTarget(e.target.value)}
                 />
-                <p className="fix-height-16 help is-danger has-text-centered">
+                <div className="fix-height-16 help is-danger has-text-centered">
                   {!isSearchTargetValid &&
                     searchTarget !== "" &&
                     "Invalid search target"}
                   <Alert />
-                </p>
+                </div>
                 <span className="icon is-large is-left">
                   <FiSearch color="blue" />
                 </span>
