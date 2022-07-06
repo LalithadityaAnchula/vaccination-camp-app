@@ -35,7 +35,6 @@ export default function RequestRow({ request }) {
       <td>{request?.user?.phone}</td>
       <td>{request?.slot?.doseType}</td>
       <td>
-        {console.log(new Date())}
         {new Date(request?.slot?.date).getTime() >= new Date().getTime() ? (
           <button className="button is-primary is-outlined is-small" disabled>
             Accept
