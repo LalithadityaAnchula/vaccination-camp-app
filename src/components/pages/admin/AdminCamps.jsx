@@ -170,7 +170,8 @@ export default function AdminCamps() {
           </div>
         </form>
       </div>
-      {isLoading ? <Loader /> : <AdminAvailableCamps />}
+      <section style={{ height: "20px" }}>{isLoading && <Loader />}</section>
+      <AdminAvailableCamps />
     </>
   );
 }
