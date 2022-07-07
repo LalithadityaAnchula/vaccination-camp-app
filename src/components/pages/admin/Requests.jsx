@@ -1,9 +1,14 @@
-import UserContext from "../../../context/users/UserContext";
-import { getRequests } from "../../../context/users/AdminAction";
-import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+//components
 import Alert from "../../shared/Alert";
 import RequestRow from "../../shared/RequestRow";
+//contexts
+import UserContext from "../../../context/users/UserContext";
+//actions
+import { getRequests } from "../../../context/users/AdminAction";
+//router dom imports
+import { useParams } from "react-router-dom";
+//react hooks
+import { useContext, useEffect } from "react";
 
 export default function Requests() {
   const { slotId } = useParams();

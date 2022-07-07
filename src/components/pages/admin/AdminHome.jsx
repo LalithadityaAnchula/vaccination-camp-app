@@ -1,24 +1,20 @@
-//React Hooks
-import { useState, useContext, useEffect, useRef } from "react";
-
-//contexts
-import UserContext from "../../../context/users/UserContext";
-import AlertContext from "../../../context/alert/AlertContext";
-
-//Actions
-import { getAll } from "../../../context/users/UserAction";
-import { createCity } from "../../../context/users/AdminAction";
-
 //Components
 import AdminAvailableCities from "../../shared/AdminAvailableCities";
 import AdminAvailableCamps from "../../shared/AdminAvailableCamps";
 import FloatDown from "../../shared/FloatDown";
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
-
+//contexts
+import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
+//Actions
+import { getAll } from "../../../context/users/UserAction";
+import { createCity } from "../../../context/users/AdminAction";
 //React icons
 import { FiSearch } from "react-icons/fi";
 import { MdLocationCity } from "react-icons/md";
+//React Hooks
+import { useState, useContext, useEffect, useRef } from "react";
 
 export default function AdminHome() {
   const { isLoading, dispatch } = useContext(UserContext);

@@ -1,14 +1,20 @@
+//components
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
+//contexts
 import UserContext from "../../../context/users/UserContext";
 import AlertContext from "../../../context/alert/AlertContext";
+//actions
 import { getCity } from "../../../context/users/UserAction";
 import { updateCity } from "../../../context/users/AdminAction";
-import { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { MdLocationCity, MdOutlineEmojiPeople } from "react-icons/md";
+//React icons
 import { FaCity } from "react-icons/fa";
 import { BsCalendar2Date } from "react-icons/bs";
+//router dom imports
+import { useNavigate, useParams } from "react-router-dom";
+import { MdLocationCity, MdOutlineEmojiPeople } from "react-icons/md";
+//React hooks
+import { useState, useContext, useEffect } from "react";
 
 export default function AdminCity() {
   const navigate = useNavigate();

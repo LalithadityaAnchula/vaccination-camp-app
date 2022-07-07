@@ -1,8 +1,13 @@
-import UserContext from "../../../context/users/UserContext";
-import { getStatsInCity } from "../../../context/users/AdminAction";
-import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+//Components
 import Loader from "../../shared/Loader";
+//contexts
+import UserContext from "../../../context/users/UserContext";
+//actions
+import { getStatsInCity } from "../../../context/users/AdminAction";
+//Router dom imports
+import { useParams } from "react-router-dom";
+//React icons
+import { useContext, useEffect } from "react";
 
 export default function CityStats() {
   const { cityId } = useParams();

@@ -1,14 +1,20 @@
+//Components
 import AdminAvailableSlots from "../../shared/AdminAvailableSlots";
-import UserContext from "../../../context/users/UserContext";
-import AlertContext from "../../../context/alert/AlertContext";
-import { getSlots } from "../../../context/users/UserAction";
-import { createSlot } from "../../../context/users/AdminAction";
-import { useContext, useEffect, useState } from "react";
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
-import { useNavigate, useParams } from "react-router-dom";
+//contexts
+import UserContext from "../../../context/users/UserContext";
+import AlertContext from "../../../context/alert/AlertContext";
+//actions
+import { getSlots } from "../../../context/users/UserAction";
+import { createSlot } from "../../../context/users/AdminAction";
+//React icons
 import { CgTimer, CgCalendarDates } from "react-icons/cg";
 import { TbNumbers } from "react-icons/tb";
+//router dom imports
+import { useNavigate, useParams } from "react-router-dom";
+//React hooks
+import { useContext, useEffect, useState } from "react";
 
 export default function AdminSlots() {
   const navigate = useNavigate();

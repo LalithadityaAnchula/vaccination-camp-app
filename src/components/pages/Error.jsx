@@ -1,3 +1,4 @@
+//React icons
 import { TbError404 } from "react-icons/tb";
 
 export default function Error() {

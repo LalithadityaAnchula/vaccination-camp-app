@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+//components
 import AdminNavbar from "../shared/AdminNavbar";
 import AdminHome from "../pages/admin/AdminHome";
 import AdminCamps from "../pages/admin/AdminCamps";
@@ -10,6 +10,8 @@ import Requests from "../pages/admin/Requests";
 import CityStats from "../pages/admin/CityStats";
 import Error from "../pages/Error";
 import PrivateRoute from "../PrivateRoute";
+//router dom imports
+import { Routes, Route } from "react-router-dom";
 
 export default function Admin() {
   return (

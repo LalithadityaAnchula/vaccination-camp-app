@@ -1,15 +1,21 @@
+//Components
 import AdminAvailableCamps from "../../shared/AdminAvailableCamps";
+import Loader from "../../shared/Loader";
+import Alert from "../../shared/Alert";
+//contexts
 import UserContext from "../../../context/users/UserContext";
 import AlertContext from "../../../context/alert/AlertContext";
+//actions
 import { getCamps } from "../../../context/users/UserAction";
 import { createCamp } from "../../../context/users/AdminAction";
-import { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+//React icons
 import { GiCampingTent } from "react-icons/gi";
 import { RiSyringeFill } from "react-icons/ri";
 import { MdLocationOn } from "react-icons/md";
-import Loader from "../../shared/Loader";
-import Alert from "../../shared/Alert";
+//router dom imports
+import { useNavigate, useParams } from "react-router-dom";
+//React hooks
+import { useState, useContext, useEffect } from "react";
 
 export default function AdminCamps() {
   const navigate = useNavigate();

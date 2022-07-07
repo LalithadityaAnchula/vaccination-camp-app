@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+//components
 import Home from "../pages/user/Home";
 import Camps from "../pages/user/Camps";
 import Profile from "../pages/user/Profile";
@@ -6,6 +6,8 @@ import Slots from "../pages/user/Slots";
 import Navbar from "../shared/Navbar";
 import Error from "../pages/Error";
 import PrivateRoute from "../PrivateRoute";
+//router dom imports
+import { Routes, Route } from "react-router-dom";
 
 export default function User() {
   return (

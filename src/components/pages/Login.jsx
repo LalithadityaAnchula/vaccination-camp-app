@@ -1,15 +1,21 @@
+//assets imports
 import logo from "../../assets/images/logo.png";
+//components
 import Alert from "../shared/Alert";
+//contexts
+import UserContext from "../../context/users/UserContext";
+import AlertContext from "../../context/alert/AlertContext";
+//actions
+import { loginUser } from "../../context/users/UserAction";
+//react icons
 import { MdOutlineMail } from "react-icons/md";
 import { FcOk } from "react-icons/fc";
 import { FiLock } from "react-icons/fi";
 import { FaExclamation } from "react-icons/fa";
-import UserContext from "../../context/users/UserContext";
-import AlertContext from "../../context/alert/AlertContext";
-import { loginUser } from "../../context/users/UserAction";
-
-import { useState, useContext } from "react";
+//router dom imports
 import { useNavigate, Link } from "react-router-dom";
+//react hooks
+import { useState, useContext } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");

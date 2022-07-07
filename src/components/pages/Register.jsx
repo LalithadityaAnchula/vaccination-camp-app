@@ -1,17 +1,24 @@
+//assets imports
 import logo from "../../assets/images/logo.png";
+//components
 import Alert from "../shared/Alert";
+import FloatUp from "../shared/FloatUp";
+//contexts
+import UserContext from "../../context/users/UserContext";
+import AlertContext from "../../context/alert/AlertContext";
+//actions
+import { registerUser } from "../../context/users/UserAction";
+//react icons
 import { MdOutlineMail, MdDriveFileRenameOutline } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import { FcOk } from "react-icons/fc";
 import { FaExclamation } from "react-icons/fa";
 import { TbDeviceMobile } from "react-icons/tb";
 import { AiOutlineIdcard } from "react-icons/ai";
-import UserContext from "../../context/users/UserContext";
-import AlertContext from "../../context/alert/AlertContext";
-import { registerUser } from "../../context/users/UserAction";
-import { useState, useContext } from "react";
+//router dom imports
 import { useNavigate, Link } from "react-router-dom";
-import FloatUp from "../shared/FloatUp";
+//react hooks
+import { useState, useContext } from "react";
 
 export default function Register() {
   const navigate = useNavigate();

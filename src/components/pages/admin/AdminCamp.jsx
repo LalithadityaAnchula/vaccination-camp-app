@@ -1,14 +1,20 @@
+//Components
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
+//contexts
 import UserContext from "../../../context/users/UserContext";
 import AlertContext from "../../../context/alert/AlertContext";
+//actions
 import { getCamp } from "../../../context/users/UserAction";
 import { updateCamp } from "../../../context/users/AdminAction";
-import { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+//React icons
 import { MdLocationCity, MdOutlineEmojiPeople } from "react-icons/md";
 import { BsCalendar2Date } from "react-icons/bs";
 import { RiSyringeFill } from "react-icons/ri";
+//Router dom imports
+import { useNavigate, useParams } from "react-router-dom";
+//React hooks
+import { useState, useContext, useEffect } from "react";
 
 export default function AdminCamp() {
   const navigate = useNavigate();
