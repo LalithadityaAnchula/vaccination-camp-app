@@ -1,5 +1,5 @@
 //React Hooks
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 
 //contexts
 import UserContext from "../../../context/users/UserContext";
@@ -24,19 +24,33 @@ export default function AdminHome() {
   const { isLoading, dispatch } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext);
   const [searchTarget, setSearchTarget] = useState("");
+  const prevSearchTarget = useRef("");
   const [citySearchResults, setCitySearchResults] = useState([]);
   const [campsSearchResults, setCampSearchResults] = useState([]);
+  const [isSearchResulstNone, setIsSearchResultsNone] = useState(false);
   const [isMetroPolitan, setIsMetroPolitan] = useState(false);
   const isSearchTargetValid = /^[a-zA-Z]+$/.test(searchTarget);
 
   useEffect(() => {
-    if (isSearchTargetValid || searchTarget === "") {
+    if ((isSearchTargetValid && !isSearchResulstNone) || searchTarget === "") {
       dispatch({ type: "SET_LOADING" });
       const fetchResults = async () => {
         const response = await getAll(searchTarget);
         if (response.success) {
           setCitySearchResults(response.data.cities.data);
           setCampSearchResults(response.data.camps.data);
+          const noResults =
+            response.data.cities.data.length === 0 &&
+            response.data.camps.data.length === 0;
+
+          prevSearchTarget.current = noResults ? searchTarget : "";
+
+          setIsSearchResultsNone(
+            noResults
+              ? searchTarget.startsWith(prevSearchTarget.current)
+              : false
+          );
+
           dispatch({ type: "GET_CITIES", payload: response.data.cities.data });
           dispatch({ type: "GET_CAMPS", payload: response.data.camps.data });
         } else {
@@ -44,8 +58,16 @@ export default function AdminHome() {
         }
       };
       fetchResults();
+    } else if (isSearchResulstNone) {
+      setIsSearchResultsNone(searchTarget.startsWith(prevSearchTarget.current));
     }
-  }, [dispatch, searchTarget, isSearchTargetValid, setAlert]);
+  }, [
+    dispatch,
+    searchTarget,
+    isSearchTargetValid,
+    setAlert,
+    isSearchResulstNone,
+  ]);
 
   const handleClick = async (e) => {
     e.preventDefault();
