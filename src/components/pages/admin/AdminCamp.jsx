@@ -1,6 +1,7 @@
 //Components
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
+import FloatUp from "../../shared/FloatUp";
 //contexts
 import UserContext from "../../../context/users/UserContext";
 import AlertContext from "../../../context/alert/AlertContext";
@@ -56,134 +57,136 @@ export default function AdminCamp() {
 
   return (
     <form onSubmit={handleSubmit} className="section">
-      <h1 className="title pb-4 has-text-grey">Update camp</h1>
-      <div className="columns is-multiline">
-        <div className="column is-one-third">
-          <div className="field">
-            <label className="label is-medium">Camp Name</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                className="input is-medium"
-                type="text"
-                placeholder="Extra small"
-                value={camp.name}
-                onChange={(e) =>
-                  setCamp((prevValue) => ({
-                    ...prevValue,
-                    name: e.target.value,
-                  }))
-                }
-              />
-              <div className="help is-danger has-text-centered">
-                <Alert />
+      <FloatUp>
+        <h1 className="title pb-4 has-text-grey">Update camp</h1>
+        <div className="columns is-multiline">
+          <div className="column is-one-third">
+            <div className="field">
+              <label className="label is-medium">Camp Name</label>
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className="input is-medium"
+                  type="text"
+                  placeholder="Extra small"
+                  value={camp.name}
+                  onChange={(e) =>
+                    setCamp((prevValue) => ({
+                      ...prevValue,
+                      name: e.target.value,
+                    }))
+                  }
+                />
+                <div className="help is-danger has-text-centered">
+                  <Alert />
+                </div>
+                <span className="icon is-small is-left">
+                  <MdLocationCity />
+                </span>
               </div>
-              <span className="icon is-small is-left">
-                <MdLocationCity />
-              </span>
+            </div>
+          </div>
+          <div className="column is-one-third">
+            <div className="field">
+              <label className="label is-medium">Created On</label>
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className="input is-medium"
+                  type="text"
+                  placeholder="Extra small"
+                  value={new Date().toLocaleDateString("en-US")}
+                  readOnly
+                />
+                <span className="icon is-small is-left">
+                  <BsCalendar2Date />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="column is-one-third">
+            <div className="field">
+              <label className="label is-medium">Population</label>
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className="input is-medium"
+                  type="number"
+                  placeholder="Extra small"
+                  value={camp.population}
+                  onChange={(e) =>
+                    setCamp((prevValue) => ({
+                      ...prevValue,
+                      population: e.target.value,
+                    }))
+                  }
+                />
+                <span className="icon is-small is-left">
+                  <MdOutlineEmojiPeople />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="column is-one-third">
+            <div className="field">
+              <label className="label is-medium">Dose 1</label>
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className="input is-medium"
+                  type="number"
+                  placeholder="Extra small"
+                  value={camp.vaccinationStock.firstDose}
+                  onChange={(e) =>
+                    setCamp((prevValue) => ({
+                      ...prevValue,
+                      vaccinationStock: {
+                        ...prevValue.vaccinationStock,
+                        firstDose: e.target.value,
+                      },
+                    }))
+                  }
+                />
+                <span className="icon is-small is-left">
+                  <RiSyringeFill />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="column is-one-third">
+            <div className="field">
+              <label className="label is-medium">Dose 2</label>
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className="input is-medium"
+                  type="number"
+                  placeholder="Extra small"
+                  value={camp.vaccinationStock.secondDose}
+                  onChange={(e) =>
+                    setCamp((prevValue) => ({
+                      ...prevValue,
+                      vaccinationStock: {
+                        ...prevValue.vaccinationStock,
+                        secondDose: e.target.value,
+                      },
+                    }))
+                  }
+                />
+                <span className="icon is-small is-left">
+                  <RiSyringeFill />
+                </span>
+              </div>
             </div>
           </div>
         </div>
-        <div className="column is-one-third">
-          <div className="field">
-            <label className="label is-medium">Created On</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                className="input is-medium"
-                type="text"
-                placeholder="Extra small"
-                value={new Date().toLocaleDateString("en-US")}
-                readOnly
-              />
-              <span className="icon is-small is-left">
-                <BsCalendar2Date />
-              </span>
-            </div>
+        <div className="level">
+          <div className="level-item">
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <button className={"button is-info is-medium"}>
+                Update Changes
+              </button>
+            )}
           </div>
         </div>
-        <div className="column is-one-third">
-          <div className="field">
-            <label className="label is-medium">Population</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                className="input is-medium"
-                type="number"
-                placeholder="Extra small"
-                value={camp.population}
-                onChange={(e) =>
-                  setCamp((prevValue) => ({
-                    ...prevValue,
-                    population: e.target.value,
-                  }))
-                }
-              />
-              <span className="icon is-small is-left">
-                <MdOutlineEmojiPeople />
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="column is-one-third">
-          <div className="field">
-            <label className="label is-medium">Dose 1</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                className="input is-medium"
-                type="number"
-                placeholder="Extra small"
-                value={camp.vaccinationStock.firstDose}
-                onChange={(e) =>
-                  setCamp((prevValue) => ({
-                    ...prevValue,
-                    vaccinationStock: {
-                      ...prevValue.vaccinationStock,
-                      firstDose: e.target.value,
-                    },
-                  }))
-                }
-              />
-              <span className="icon is-small is-left">
-                <RiSyringeFill />
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="column is-one-third">
-          <div className="field">
-            <label className="label is-medium">Dose 2</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                className="input is-medium"
-                type="number"
-                placeholder="Extra small"
-                value={camp.vaccinationStock.secondDose}
-                onChange={(e) =>
-                  setCamp((prevValue) => ({
-                    ...prevValue,
-                    vaccinationStock: {
-                      ...prevValue.vaccinationStock,
-                      secondDose: e.target.value,
-                    },
-                  }))
-                }
-              />
-              <span className="icon is-small is-left">
-                <RiSyringeFill />
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="level">
-        <div className="level-item">
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <button className={"button is-info is-medium"}>
-              Update Changes
-            </button>
-          )}
-        </div>
-      </div>
+      </FloatUp>
     </form>
   );
 }
