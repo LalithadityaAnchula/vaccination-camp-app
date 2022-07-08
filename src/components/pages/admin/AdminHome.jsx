@@ -28,7 +28,12 @@ export default function AdminHome() {
   const isSearchTargetValid = /^[a-zA-Z]+$/.test(searchTarget);
 
   useEffect(() => {
-    if ((isSearchTargetValid && !isSearchResulstNone) || searchTarget === "") {
+    if (
+      (isSearchTargetValid &&
+        searchTarget.length >= 3 &&
+        !isSearchResulstNone) ||
+      searchTarget === ""
+    ) {
       dispatch({ type: "SET_LOADING" });
       const fetchResults = async () => {
         const response = await getAll(searchTarget);
