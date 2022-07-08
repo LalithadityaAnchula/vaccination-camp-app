@@ -12,14 +12,14 @@ import { Routes, Route } from "react-router-dom";
 export default function User() {
   return (
     <>
-      <Navbar />
+      <Navbar role="user" />
       <Routes>
         <Route element={<PrivateRoute allowedRole="user" />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/cities/:cityId/:cityName/camps" element={<Camps />} />
+          <Route path="/cities/:cityId/camps" element={<Camps />} />
           <Route
-            path="/cities/:cityId/:cityName/camps/:campId/:campName/slots"
+            path="/cities/:cityId/camps/:campId/slots"
             element={<Slots />}
           />
         </Route>

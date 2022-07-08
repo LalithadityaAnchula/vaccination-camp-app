@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="container">
+      <main className="section">
         <div className="my-6 columns">
           <div className="column is-half">
             <div className="field">
@@ -102,23 +102,23 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {searchTarget !== "" && citySearchResults.length > 0 && (
+              <h2 className="mx-4 my-5 title is-4 has-text-grey">Cities</h2>
+            )}
+            <AvailableCities role="user" />
+            {searchTarget !== "" && campsSearchResults.length > 0 && (
+              <>
+                <h2 className="mx-4 my-5 title is-4 has-text-grey">Camps</h2>
+                <AvailableCamps role="user" />
+              </>
+            )}
+          </>
+        )}
       </main>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          {searchTarget !== "" && citySearchResults.length > 0 && (
-            <h2 className="mx-6 my-5 title is-4 has-text-grey">Cities</h2>
-          )}
-          <AvailableCities />
-          {searchTarget !== "" && campsSearchResults.length > 0 && (
-            <>
-              <h2 className="mx-6 my-5 title is-4 has-text-grey">Camps</h2>
-              <AvailableCamps />
-            </>
-          )}
-        </>
-      )}
     </>
   );
 }

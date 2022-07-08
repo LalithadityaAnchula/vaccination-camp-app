@@ -31,7 +31,7 @@ export default function SlotCard({ slot, inProfile }) {
           <div
             className={`card ${
               user?.activeSlot !== null &&
-              user?.activeSlot?._id === slot._id &&
+              user?.activeSlot?._id === slot?._id &&
               "has-background-primary-light"
             }`}
           >

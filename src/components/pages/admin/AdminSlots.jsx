@@ -1,5 +1,5 @@
 //Components
-import AdminAvailableSlots from "../../shared/AdminAvailableSlots";
+import AvailableSlots from "../../shared/AvailableSlots";
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
 //contexts
@@ -18,14 +18,15 @@ import { useContext, useEffect, useState } from "react";
 
 export default function AdminSlots() {
   const navigate = useNavigate();
-  const { isLoading, dispatch, slots } = useContext(UserContext);
+  const { isLoading, dispatch } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext);
   const { cityId, campId, campName } = useParams();
-  const [slot, setSlot] = useState({
+  const initialState = {
     date: new Date().toLocaleDateString("en-ca"),
     doseType: 1,
     slotType: "morning",
-  });
+  };
+  const [slot, setSlot] = useState(initialState);
   useEffect(() => {
     dispatch({ type: "SET_LOADING" });
     const fetchSlots = async () => {
@@ -149,9 +150,9 @@ export default function AdminSlots() {
             </div>
           </div>
         </div>
+        <section style={{ height: "20px" }}>{isLoading && <Loader />}</section>
+        <AvailableSlots role="admin" />
       </form>
-      <section style={{ height: "20px" }}>{isLoading && <Loader />}</section>
-      <AdminAvailableSlots slots={slots} />
     </>
   );
 }

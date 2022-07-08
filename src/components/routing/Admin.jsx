@@ -1,5 +1,5 @@
 //components
-import AdminNavbar from "../shared/AdminNavbar";
+import Navbar from "../shared/Navbar";
 import AdminHome from "../pages/admin/AdminHome";
 import AdminCamps from "../pages/admin/AdminCamps";
 import AdminCamp from "../pages/admin/AdminCamp";
@@ -16,25 +16,19 @@ import { Routes, Route } from "react-router-dom";
 export default function Admin() {
   return (
     <>
-      <AdminNavbar />
+      <Navbar role="admin" />
       <Routes>
         <Route element={<PrivateRoute allowedRole="admin" />}>
           <Route path="/" element={<AdminHome />} />
           <Route path="/cities/:cityId" element={<AdminCity />} />
+          <Route path="/cities/:cityId/camps" element={<AdminCamps />} />
+          <Route path="/cities/:cityId/camps/:campId" element={<AdminCamp />} />
           <Route
-            path="/cities/:cityId/:cityName/camps"
-            element={<AdminCamps />}
-          />
-          <Route
-            path="/cities/:cityId/:cityName/camps/:campId"
-            element={<AdminCamp />}
-          />
-          <Route
-            path="/cities/:cityId/:cityName/camps/:campId/:campName/slots"
+            path="/cities/:cityId/camps/:campId/slots"
             element={<AdminSlots />}
           />
           <Route
-            path="/cities/:cityId/:cityName/camps/:campId/:campName/slots/:slotId/requests"
+            path="/cities/:cityId/camps/:campId/slots/:slotId/requests"
             element={<Requests />}
           />
           <Route path="/cities/:cityId/stats" element={<CityStats />} />

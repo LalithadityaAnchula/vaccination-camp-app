@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import FloatUp from "./FloatUp";
 import ExpandOnHover from "./ExpandOnHover";
-
-export default function CityCard({ city }) {
+import { FcAbout, FcEditImage } from "react-icons/fc";
+import { ImStatsDots } from "react-icons/im";
+export default function CityCard({ city, role }) {
   return (
     <ExpandOnHover>
       <FloatUp>
@@ -15,14 +16,37 @@ export default function CityCard({ city }) {
               </p>
             </div>
           </div>
-          <div className="card-footer">
-            <Link
-              to={`/cities/${city._id}/${city.name}/camps`}
-              className="card-footer-item button is-info is-light"
-            >
-              Camps
-            </Link>
-          </div>
+          {role === "admin" ? (
+            <div className="card-footer">
+              <Link
+                to={`cities/${city._id}/camps`}
+                className="card-footer-item button is-info is-light"
+              >
+                <FcAbout />
+              </Link>
+              <Link
+                to={`cities/${city._id}`}
+                className="card-footer-item button is-info is-light"
+              >
+                <FcEditImage />
+              </Link>
+              <Link
+                to={`cities/${city._id}/stats`}
+                className="card-footer-item button is-info is-light"
+              >
+                <ImStatsDots />
+              </Link>
+            </div>
+          ) : (
+            <div className="card-footer">
+              <Link
+                to={`/cities/${city._id}/camps`}
+                className="card-footer-item button is-info is-light"
+              >
+                Camps
+              </Link>
+            </div>
+          )}
         </div>
       </FloatUp>
     </ExpandOnHover>

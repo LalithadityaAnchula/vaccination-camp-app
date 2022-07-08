@@ -1,5 +1,5 @@
 //Components
-import AdminAvailableCamps from "../../shared/AdminAvailableCamps";
+import AvailableCamps from "../../shared/AvailableCamps";
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
 //contexts
@@ -22,8 +22,7 @@ export default function AdminCamps() {
   const { isLoading, dispatch } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext);
   const { cityId, cityName } = useParams();
-
-  const [camp, setCamp] = useState({
+  const initialState = {
     vaccinationStock: {
       firstDose: 0,
       secondDose: 0,
@@ -31,7 +30,8 @@ export default function AdminCamps() {
     address: "",
     name: "",
     city: cityId,
-  });
+  };
+  const [camp, setCamp] = useState(initialState);
 
   useEffect(() => {
     dispatch({ type: "SET_LOADING" });
@@ -49,6 +49,7 @@ export default function AdminCamps() {
     const response = await createCamp(cityId, camp);
     if (response.success) {
       dispatch({ type: "ADD_CAMP", payload: response.data });
+      setCamp(initialState);
     } else {
       dispatch({ type: "UNSET_LOADING" });
       setAlert(response.msg, "danger");
@@ -57,7 +58,7 @@ export default function AdminCamps() {
 
   return (
     <>
-      <div className="section">
+      <main className="section">
         <h1 className="title pb-4">{cityName}</h1>
         <form onSubmit={handleSubmit}>
           <div className="columns is-multiline">
@@ -175,9 +176,9 @@ export default function AdminCamps() {
             </div>
           </div>
         </form>
-      </div>
-      <section style={{ height: "20px" }}>{isLoading && <Loader />}</section>
-      <AdminAvailableCamps />
+        <section style={{ height: "20px" }}>{isLoading && <Loader />}</section>
+        <AvailableCamps role="admin" />
+      </main>
     </>
   );
 }

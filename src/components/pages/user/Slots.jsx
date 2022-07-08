@@ -11,7 +11,7 @@ export default function Slots() {
   const navigate = useNavigate();
   const { isLoading, dispatch } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext);
-  const { cityId, campId, campName } = useParams();
+  const { cityId, campId } = useParams();
   useEffect(() => {
     dispatch({ type: "SET_LOADING" });
     const fetchSlotsAndUsers = async () => {
@@ -33,10 +33,9 @@ export default function Slots() {
     <>
       <div className="fix-height-loader">{isLoading && <Loader />}</div>
       <Alert />
-      <div className="section">
-        <h1 className="title has-text-grey">{campName}</h1>
-      </div>
-      <AvailableSlots />
+      <main className="section">
+        <AvailableSlots role="user" />
+      </main>
     </>
   );
 }

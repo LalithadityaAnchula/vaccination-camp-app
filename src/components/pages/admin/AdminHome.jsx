@@ -1,6 +1,6 @@
 //Components
-import AdminAvailableCities from "../../shared/AdminAvailableCities";
-import AdminAvailableCamps from "../../shared/AdminAvailableCamps";
+import AvailableCities from "../../shared/AvailableCities";
+import AvailableCamps from "../../shared/AvailableCamps";
 import FloatDown from "../../shared/FloatDown";
 import Loader from "../../shared/Loader";
 import Alert from "../../shared/Alert";
@@ -88,7 +88,7 @@ export default function AdminHome() {
 
   return (
     <>
-      <main className="container">
+      <main className="section">
         <div className="section columns">
           <div className="column is-half is-offset-one-quarter">
             <FloatDown>
@@ -157,23 +157,23 @@ export default function AdminHome() {
               </div>
             </>
           )}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {searchTarget !== "" && citySearchResults.length > 0 && (
+              <h2 className="mx-4 my-5 title is-4 has-text-grey">Cities</h2>
+            )}
+            <AvailableCities role="admin" />
+            {searchTarget !== "" && campsSearchResults.length > 0 && (
+              <>
+                <h2 className="mx-4 my-5 title is-4 has-text-grey">Camps</h2>
+                <AvailableCamps role="admin" />
+              </>
+            )}
+          </>
+        )}
       </main>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          {searchTarget !== "" && citySearchResults.length > 0 && (
-            <h2 className="mx-6 my-5 title is-4 has-text-grey">Cities</h2>
-          )}
-          <AdminAvailableCities />
-          {searchTarget !== "" && campsSearchResults.length > 0 && (
-            <>
-              <h2 className="mx-6 my-5 title is-4 has-text-grey">Camps</h2>
-              <AdminAvailableCamps />
-            </>
-          )}
-        </>
-      )}
     </>
   );
 }

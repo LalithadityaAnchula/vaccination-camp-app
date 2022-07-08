@@ -7,7 +7,7 @@ import { logoutUser } from "../../context/users/UserAction";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import FloatDown from "../shared/FloatDown";
-export default function Navbar() {
+export default function Navbar({ role }) {
   const [isActive, setisActive] = useState(false);
   const currentPath = useLocation().pathname;
   const { dispatch } = useContext(UserContext);
@@ -61,7 +61,7 @@ export default function Navbar() {
           <div className="navbar-end">
             <div className="navbar-item">
               <NavLink
-                to="/"
+                to={role === "admin" ? "/admin" : "/"}
                 onClick={() => setisActive(!isActive)}
                 activeclassname="is-active"
                 className={`navbar-item button is-white is-tab nav-link${
@@ -72,7 +72,7 @@ export default function Navbar() {
               </NavLink>
               <hr />
               <NavLink
-                to="/profile"
+                to={role === "admin" ? "/admin/profile" : "/profile"}
                 className={`navbar-item button is-white is-tab nav-link${
                   currentPath === "/profile" ? " is-active" : ""
                 }`}

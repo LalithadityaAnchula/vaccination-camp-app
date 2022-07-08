@@ -33,13 +33,11 @@ export default function Camps() {
       {isLoading ? (
         <Loader />
       ) : (
-        <>
-          <div className="section">
-            <h1 className="title has-text-grey">{cityName}</h1>
-          </div>
+        <main className="section">
+          <h1 className="title has-text-grey">{cityName}</h1>
           <Alert />
-          <AvailableCamps />
-        </>
+          <AvailableCamps role="user" />
+        </main>
       )}
     </>
   );
