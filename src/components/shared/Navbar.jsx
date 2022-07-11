@@ -2,13 +2,17 @@ import logo from "../../assets/images/logo.png";
 import { AiFillHome } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { IoDesktop } from "react-icons/io5";
 import UserContext from "../../context/users/UserContext";
 import { logoutUser } from "../../context/users/UserAction";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import FloatDown from "../shared/FloatDown";
+import Sessions from "./Sessions";
+
 export default function Navbar({ role }) {
   const [isActive, setisActive] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
   const currentPath = useLocation().pathname;
   const { dispatch } = useContext(UserContext);
   const navigate = useNavigate();
@@ -80,16 +84,24 @@ export default function Navbar({ role }) {
                 <CgProfile className="mx-4" />
               </NavLink>
               <hr />
-              <NavLink
-                to="/profile"
-                className={`navbar-item button is-white is-tab nav-link${
-                  currentPath === "/logout" ? " is-active" : ""
-                }`}
-              >
+              <div className="nav-item">
                 <button className="button is-white" onClick={handleLogout}>
                   <MdOutlineLogout className="mx-4" />
                 </button>
-              </NavLink>
+              </div>
+              <hr />
+              <div className="nav-item is-flex is-justify-content-center is-align-items-center">
+                <button
+                  className="button is-white"
+                  onClick={(e) => setIsShowModal(true)}
+                >
+                  <IoDesktop className="mx-4" />
+                </button>
+                <Sessions
+                  isShowModal={isShowModal}
+                  setIsShowModal={setIsShowModal}
+                />
+              </div>
             </div>
           </div>
         </div>
