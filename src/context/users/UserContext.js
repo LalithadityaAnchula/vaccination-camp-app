@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
     camps: [],
     slots: [],
     requests: [],
+    sessions: [],
     stats: {},
   };
 

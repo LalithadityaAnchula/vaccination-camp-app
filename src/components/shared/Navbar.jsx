@@ -84,7 +84,7 @@ export default function Navbar({ role }) {
                 <CgProfile className="mx-4" />
               </NavLink>
               <hr />
-              <div className="nav-item">
+              <div className="nav-item is-flex is-justify-content-center is-align-items-center">
                 <button className="button is-white" onClick={handleLogout}>
                   <MdOutlineLogout className="mx-4" />
                 </button>

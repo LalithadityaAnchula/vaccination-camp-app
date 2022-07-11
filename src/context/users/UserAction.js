@@ -63,6 +63,7 @@ export const authenticate = async () => {
   }
 };
 
+//getting user profile
 export const getUser = async () => {
   try {
     const res = await axiosInstance.get("/auth/me");
@@ -73,6 +74,7 @@ export const getUser = async () => {
   }
 };
 
+//updating user profile
 export const updateUser = async (firstName, lastName, email, phone, aadhar) => {
   try {
     const res = await axiosInstance.put("/auth/me", {
@@ -89,7 +91,7 @@ export const updateUser = async (firstName, lastName, email, phone, aadhar) => {
   }
 };
 
-//getting all
+//getting all search results for camps and cities
 export const getAll = async (searchTarget) => {
   try {
     const citiesResponse = await axiosInstance.get(
@@ -170,13 +172,46 @@ export const getSlots = async (cityId, campId) => {
   }
 };
 
-//Booking and slot
+//Booking slot
 export const bookSlot = async (cityId, campId, slotId, userId) => {
   try {
     const res = await axiosInstance.put(
       `/cities/${cityId}/camps/${campId}/slots/${slotId}/book`,
       { userId }
     );
+    return res.data;
+  } catch (err) {
+    console.log(err.response);
+    return err.response.data;
+  }
+};
+
+//getting all the sessions of the user
+export const getActiveSessions = async () => {
+  try {
+    const res = await axiosInstance.get(`/auth/sessions`);
+    return res.data;
+  } catch (err) {
+    console.log(err.response);
+    return err.response.data;
+  }
+};
+
+//terminatinga all sessions of the user
+export const terminateSessions = async () => {
+  try {
+    const res = await axiosInstance.delete(`/auth/sessions`);
+    return res.data;
+  } catch (err) {
+    console.log(err.response);
+    return err.response.data;
+  }
+};
+
+//terminatinga  session
+export const terminateSession = async (sessionId) => {
+  try {
+    const res = await axiosInstance.delete(`/auth/sessions/${sessionId}`);
     return res.data;
   } catch (err) {
     console.log(err.response);

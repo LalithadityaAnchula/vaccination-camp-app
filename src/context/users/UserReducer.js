@@ -134,6 +134,27 @@ const appReducer = (state, action) => {
         isLoading: false,
         stats: action.payload,
       };
+    case "GET_SESSIONS":
+      return {
+        ...state,
+        isLoading: false,
+        sessions: action.payload,
+      };
+    case "TERMINATE_SESSIONS":
+      return {
+        ...state,
+        isLoading: false,
+        sessions: [],
+      };
+    case "TERMINATE_SESSION":
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        sessions: state.sessions.filter((session) => {
+          return session.id !== action.payload;
+        }),
+      };
     default:
       return state;
   }
