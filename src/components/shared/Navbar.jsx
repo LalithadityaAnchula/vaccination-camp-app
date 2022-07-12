@@ -97,10 +97,12 @@ export default function Navbar({ role }) {
                 >
                   <IoDesktop className="mx-4" />
                 </button>
-                <Sessions
-                  isShowModal={isShowModal}
-                  setIsShowModal={setIsShowModal}
-                />
+                {isShowModal && (
+                  <Sessions
+                    isShowModal={isShowModal}
+                    setIsShowModal={setIsShowModal}
+                  />
+                )}
               </div>
             </div>
           </div>
