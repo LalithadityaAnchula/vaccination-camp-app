@@ -39,7 +39,7 @@ export default function SessionRecord({ session }) {
   };
 
   return (
-    <div className="columns">
+    <div className={`columns ${session?.current && "has-background-warning"}`}>
       <div className="column is-one-third is-flex is-justify-content-center is-align-items-center ">
         <div className="icon-text">
           <span className="icon has-text-grey">
@@ -60,13 +60,15 @@ export default function SessionRecord({ session }) {
           <span> {session?.ua?.browser?.name}</span>
         </div>
       </div>
-      <div className="column is-one-third is-flex is-justify-content-center is-align-items-center ">
-        <MdDeleteOutline
-          className="is-clickable"
-          color="red"
-          onClick={handleTerminateSession}
-        />
-      </div>
+      {!session?.current && (
+        <div className="column is-one-third is-flex is-justify-content-center is-align-items-center ">
+          <MdDeleteOutline
+            className="is-clickable"
+            color="red"
+            onClick={handleTerminateSession}
+          />
+        </div>
+      )}
     </div>
   );
 }
